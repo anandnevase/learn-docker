@@ -34,7 +34,7 @@ $ docker ps
 CONTAINER ID        IMAGE                       COMMAND              CREATED             STATUS              PORTS                              NAMES
 d8a646fdd504        openshift/hello-openshift   "/hello-openshift"   8 seconds ago       Up 7 seconds        0.0.0.0:8080->8080/tcp, 8888/tcp   musing_galois
 ```
-### 3. If we start new web container With same PORT mapping which already used
+### 3. If we start new web container With same PORT, You will see 'port is already allocated' ERROR
 ```
 # You will observe that,  port is already allocated error we get
 $ docker run -d -p 8080:8080  openshift/hello-openshift
@@ -44,6 +44,7 @@ docker: Error response from daemon: driver failed programming external connectiv
 # starting container with 9090 port
 $ docker run -d -p 9090:8080  openshift/hello-openshift
 9f4c26ebe66025324b03b232b2d84c7776c3e1323c3dc860e3adb9172d0c213e
+
 $ docker ps
 CONTAINER ID        IMAGE                       COMMAND              CREATED             STATUS              PORTS                              NAMES
 9f4c26ebe660        openshift/hello-openshift   "/hello-openshift"   3 seconds ago       Up 2 seconds        8888/tcp, 0.0.0.0:9090->8080/tcp   nifty_banzai
@@ -54,14 +55,16 @@ ba14dcec438a        openshift/hello-openshift   "/hello-openshift"   7 minutes a
 ```
 ### 4. Stopped Running container
 
-Sytanx
+
 ```bash   
    docker stop <container-name> or <container-id> 
 ```  
 Example
 ```bash
+
 $ docker stop keen_rubin
 nifty_banzai
+
 $ docker ps -a
 CONTAINER ID        IMAGE                       COMMAND              CREATED             STATUS                     PORTS                              NAMES
 ba14dcec438a        openshift/hello-openshift   "/hello-openshift"   1 minutes ago       Exited (2) 6 minutes ago                                      keen_rubin
@@ -70,7 +73,7 @@ ba14dcec438a        openshift/hello-openshift   "/hello-openshift"   1 minutes a
 
 ### 5. Starting  container
 
-Sytanx
+
 ```bash   
    docker start <container-name> or <container-id> 
 ```  
@@ -78,6 +81,7 @@ Example
 ```bash
 $ docker start keen_rubin
 nifty_banzai
+
 $ docker ps -a
 CONTAINER ID        IMAGE                       COMMAND              CREATED             STATUS                     PORTS                              NAMES
 9f4c26ebe660        openshift/hello-openshift   "/hello-openshift"   2 minutes ago       Up 8 seconds               8888/tcp, 0.0.0.0:9090->8080/tcp   keen_rubin
@@ -85,7 +89,7 @@ CONTAINER ID        IMAGE                       COMMAND              CREATED    
 
 ### 6. Restarting  container
 
-Sytanx
+
 ```bash   
    docker restart <container-name> or <container-id> 
 ```  
@@ -94,13 +98,14 @@ Example
 # restarting using container-id
 $ docker restart 9f4c26ebe660
 9f4c26ebe660
+
 $ docker ps 
 CONTAINER ID        IMAGE                       COMMAND              CREATED             STATUS              PORTS                              NAMES
 9f4c26ebe660        openshift/hello-openshift   "/hello-openshift"   4 minutes ago       Up 5 seconds        8888/tcp, 0.0.0.0:9090->8080/tcp   keen_rubin
 ```
 ### 7. Remove Container
 
-Sytanx
+
 ```bash   
    docker search <image-name-to-search>
 ```  
@@ -123,7 +128,7 @@ $ docker rm -f 9f4c26ebe660
 
 ### 8. Search Image
 
-Sytanx
+
 ```bash   
    docker search <image-name-to-search>
 ```  
@@ -132,7 +137,7 @@ Example
 $ docker search http 
 ```
 
-### 9. By default Docker container will stop if Docker-Engine(daemon) is restarted
+### 9. By default Docker container will stop if Docker-Engine(daemon)/machine restarted
 ```bash
 $ docker ps
 CONTAINER ID        IMAGE                       COMMAND              CREATED             STATUS              PORTS                              NAMES
@@ -174,7 +179,7 @@ d8a646fdd504        openshift/hello-openshift   "/hello-openshift"   29 minutes 
 ba14dcec438a        openshift/hello-openshift   "/hello-openshift"   31 minutes ago      Exited (2) 31 minutes ago                       keen_rubin
 ```
 
-### 10. Configuring Docker container to restart even if Docker-Engine(daemon)/machine is rebooted using --restart=always option
+### 10. Configuring Docker container to restart even if Docker-Engine(daemon)/machine is rebooted, using --restart=always option
 ```bash
 $ docker run -it --name httpd-restart --restart always -d -p 9090:80 httpd
 646a81d5d8a4883b2072a05dec7ef9887d54bfeb95ee3fdd1fc0b5f83bb790bd
