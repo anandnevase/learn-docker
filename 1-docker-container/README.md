@@ -197,3 +197,51 @@ UBUNTU_CODENAME=focal
 $ docker container run alpine uname -a
 # Linux f08dbbe9199b 5.8.0-22-generic #23-Ubuntu SMP Fri Oct 9 00:34:40 UTC 2020 x86_64 Linux
 ```
+
+
+### Configuring Docker container to restart even if Docker-Engine(daemon)/machine is rebooted, using --restart=always option
+```bash
+$ docker container run -it --name httpd-restart --restart always -d -p 9090:80 httpd
+646a81d5d8a4883b2072a05dec7ef9887d54bfeb95ee3fdd1fc0b5f83bb790bd
+
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND              CREATED             STATUS              PORTS                  NAMES
+646a81d5d8a4        httpd               "httpd-foreground"   5 seconds ago       Up 4 seconds        0.0.0.0:9090->80/tcp   httpd-restart
+
+$ sudo service docker restart
+Stopping Docker: docker.
+Starting Docker: docker.
+
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND              CREATED             STATUS              PORTS                  NAMES
+646a81d5d8a4        httpd               "httpd-foreground"   33 seconds ago      Up 5 seconds        0.0.0.0:9090->80/tcp   httpd-restart
+```
+
+### Configuring Docker container to restart automatic on failure 
+```bash
+$ docker container ls -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+$ docker container run -d -p 8080:8080 --restart=always openshift/hello-openshift
+f0d91de758a65a22f30ef80bc2aaa4b7ad409c38c458b778eacc3194e171d0f1
+$ docker container ls
+CONTAINER ID   IMAGE                       COMMAND              CREATED         STATUS         PORTS                                                 NAMES
+f0d91de758a6   openshift/hello-openshift   "/hello-openshift"   5 seconds ago   Up 4 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 8888/tcp   hungry_antonelli
+$ service docker restart
+Redirecting to /bin/systemctl restart docker.service
+$ docker container ls
+CONTAINER ID   IMAGE                       COMMAND              CREATED          STATUS         PORTS                                                 NAMES
+f0d91de758a6   openshift/hello-openshift   "/hello-openshift"   22 seconds ago   Up 3 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 8888/tcp   hungry_antonelli
+```
+
+### Get Container logs 
+```bash
+$ docker container ls
+CONTAINER ID   IMAGE                       COMMAND              CREATED          STATUS          PORTS                                                 NAMES
+f0d91de758a6   openshift/hello-openshift   "/hello-openshift"   19 minutes ago   Up 18 minutes   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 8888/tcp   hungry_antonelli
+
+$ docker container logs -f hungry_antonelli
+serving on 8888
+serving on 8080
+serving on 8888
+serving on 8080
+```

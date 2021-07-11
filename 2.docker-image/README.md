@@ -70,7 +70,6 @@ deleted: sha256:ec16024aa036172544908ec4e5f842627d04ef99ee9b8d9aaa26b9c2a4b52baa
 Total reclaimed space: 59.19MB
 ```
 
-
 ### Practice command to check operating images 
 ```bash
 $ docker container run -ti --name container1 centos  cat /etc/os-release
