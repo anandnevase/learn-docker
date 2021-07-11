@@ -3,11 +3,11 @@
 ### 1. Starting Web container With PORT mapping
 
 ```bash
-   docker run --name <container-name> -p <host-port>:<container-port> <image-name>
+   docker container run --name <container-name> -p <host-port>:<container-port> <image-name>
 ```  
 Example
 ```bash
-$ docker run -p 8080:8080  openshift/hello-openshift
+$ docker container run -p 8080:8080  openshift/hello-openshift
 serving on 8888
 serving on 8080
 Servicing request.
@@ -22,12 +22,12 @@ ba14dcec438a        openshift/hello-openshift   "/hello-openshift"   About a min
 ```
 ### 2. Starting Web container With PORT mapping in Detached (-d) Mode
 ```bash
-   docker run --name <container-name> -d -p <host-port>:<container-port> <image-name>
+   docker container run --name <container-name> -d -p <host-port>:<container-port> <image-name>
 ```  
 
 Example
 ```bash
-$ docker run -d -p 8080:8080  openshift/hello-openshift
+$ docker container run -d -p 8080:8080  openshift/hello-openshift
 d8a646fdd504268dc62dd5839ee4099ad35bb3948da9a8b4a4c4b88194ef43bd
 
 $ docker ps
@@ -37,12 +37,12 @@ d8a646fdd504        openshift/hello-openshift   "/hello-openshift"   8 seconds a
 ### 3. If we start new web container With same PORT, You will see 'port is already allocated' ERROR
 ```
 # You will observe that,  port is already allocated error we get
-$ docker run -d -p 8080:8080  openshift/hello-openshift
+$ docker container run -d -p 8080:8080  openshift/hello-openshift
 9e0f6d6d73ce5680a3828817f46f0d7bb7d50543a0ec39343c3dfe60c7e920a0
 docker: Error response from daemon: driver failed programming external connectivity on endpoint silly_shirley (2b71370acbf69874c82709cce7d1d459d18a2fbfc2fc21f1f28ca11049eaedd9): Bind for 0.0.0.0:8080 failed: port is already allocated.
 
 # starting container with 9090 port
-$ docker run -d -p 9090:8080  openshift/hello-openshift
+$ docker container run -d -p 9090:8080  openshift/hello-openshift
 9f4c26ebe66025324b03b232b2d84c7776c3e1323c3dc860e3adb9172d0c213e
 
 $ docker ps
@@ -181,7 +181,7 @@ ba14dcec438a        openshift/hello-openshift   "/hello-openshift"   31 minutes 
 
 ### 10. Configuring Docker container to restart even if Docker-Engine(daemon)/machine is rebooted, using --restart=always option
 ```bash
-$ docker run -it --name httpd-restart --restart always -d -p 9090:80 httpd
+$ docker container run -it --name httpd-restart --restart always -d -p 9090:80 httpd
 646a81d5d8a4883b2072a05dec7ef9887d54bfeb95ee3fdd1fc0b5f83bb790bd
 
 $ docker ps
