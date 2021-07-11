@@ -15,7 +15,7 @@ c72750a979b9: Pull complete
 Digest: sha256:91528597e842ab1b3b25567191fa7d4e211cb3cc332071fa031cfed2b5892f9e
 Status: Downloaded newer image for nginx:alpine
  ---> b9e2356ea1be
-Step 2/4 : LABEL maintainer="Collabnix"
+Step 2/4 : LABEL maintainer="anandnevase"
  ---> Running in 5736cfacddb9
 Removing intermediate container 5736cfacddb9
  ---> 2cd63199da7f
