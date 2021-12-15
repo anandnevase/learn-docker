@@ -1,8 +1,9 @@
-## Docker Volume
+## Docker Persistent using -v <host-path>:<container-path>
 
 ### Create /tmp/index.html
 ```bash
-$ echo  "Hello from Persisten Storage" > /tmp/index.html
+$ mkdir /tmp/docker-vol
+$ echo  "Hello from Persistent Storage" > /tmp/docker-vol/index.html
 ```
 
 ### Create container by attaching volumes using -v
@@ -10,7 +11,7 @@ $ echo  "Hello from Persisten Storage" > /tmp/index.html
 $ docker container ls
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
-$ docker container run -d -v /tmp:/usr/share/nginx/html/ -p 80:80 --rm nginx:alpine
+$ docker container run -d -v /tmp/docker-vol:/usr/share/nginx/html/ -p 80:80 --rm --name=demo-app nginx:alpine
 c53ec2d990ccdfa263288ce763efe712ec606775bdd9ae173ecd1ff9897ec5b5
 
 ```
@@ -20,7 +21,37 @@ c53ec2d990ccdfa263288ce763efe712ec606775bdd9ae173ecd1ff9897ec5b5
 $ curl http://localhost:80
 Hello from Persisten Storage
 ```
+
+
+### Edit file form docker host and Access app url
+```bash
+$  echo  "Hello from Persistent Storage - Edited from docker host" > /tmp/docker-vol/index.html
+
+$ curl http://localhost:80
+Hello from Persistent Storage - Edited from docker host
 ```
+
+### Edit file form docker container and Access app url
+```bash
+$  docker exec -i -t demo-app sh
+$  echo  "Hello from Persistent Storage - Edited from container" > /tmp/docker-vol/index.html
+$  exit
+
+$ curl http://localhost:80
+Hello from Persistent Storage - Edited from container
+```
+
+
+### Delete and recreate container then Access app url
+```bash
+$  docker contaienr rm -f  demo-app 
+$  docker container run -d -v /tmp/docker-vol:/usr/share/nginx/html/ -p 80:80 --rm --name=demo-app nginx:alpine
+
+$ curl http://localhost:80
+Hello from Persistent Storage - Edited from container
+```
+
+## Docker Persistent using volume
 
 ### Create Docker volume Mount
 ```bash
