@@ -12,6 +12,7 @@ docker-compose version 1.26.2, build 1110ad01
 
 ### Start Multicontainer from docker-compose
 ```bash
+$ cd ./learn-docker/7.docker-compose
 $ docker-compose up -d
 ```
 

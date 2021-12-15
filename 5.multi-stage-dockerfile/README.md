@@ -2,6 +2,8 @@
 
 ### Build custom-nginx from multistage dockerfile
 ```bash
+$ cd ./learn-docker/5.multi-stage-dockerfile
+
 $ docker image build -t custom-nginx .
 Sending build context to Docker daemon  95.75MB
 Step 1/4 : FROM nginx:alpine
