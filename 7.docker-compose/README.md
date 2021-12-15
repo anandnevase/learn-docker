@@ -28,12 +28,12 @@ $ docker-compose stop
 
 ### Start only one container
 ```bash
-$ docker-compose run db
+$ docker-compose run db -d
 ```
 
 ### Start all containers
 ```bash
-$ docker-compose up
+$ docker-compose up -d
 ```
 
 ### Check all containers
