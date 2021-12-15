@@ -26,11 +26,6 @@ $ docker-compose stop
 
 ```
 
-### Start only one container
-```bash
-$ docker-compose run db -d
-```
-
 ### Start all containers
 ```bash
 $ docker-compose up -d
@@ -44,7 +39,6 @@ $ docker-compose ps
 ### Scale up/down container
 ```bash
 $  docker-compose scale --help
-$  docker-compose scale wordpress=2
 $  docker-compose scale db=2
 $  docker-compose ps
 $  docker-compose scale db=1
