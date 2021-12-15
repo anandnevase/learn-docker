@@ -2,6 +2,8 @@
 
 ### Build my-nginx from dockerfile
 ```bash
+$ cd ./learn-docker/4.dockerfile
+
 $ docker image build -t my-nginx .
 Sending build context to Docker daemon  95.75MB
 Step 1/4 : FROM nginx:alpine
